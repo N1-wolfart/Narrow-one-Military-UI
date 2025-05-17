@@ -1,0 +1,100 @@
+// ==UserScript==
+// @name         Narrow.One Military UI with Animation
+// @namespace    http://tampermonkey.net/
+// @version      1.1
+// @description  Customize Narrow.One with military style and lightweight animation
+// @author       wolfart
+// @match        https://narrow.one/*
+// @grant        none
+// ==/UserScript==
+
+(function() {
+    'use strict';
+
+    // Webフォントの読み込み
+    const fontLink = document.createElement('link');
+    fontLink.href = "https://fonts.googleapis.com/css2?family=Orbitron:wght@500&display=swap";
+    fontLink.rel = "stylesheet";
+    document.head.appendChild(fontLink);
+
+    // CSS追加
+    const style = document.createElement('style');
+    style.innerHTML = `
+        @keyframes flashGlow {
+            0%, 100% { text-shadow: 0 0 2px #8da159; }
+            50% { text-shadow: 0 0 8px #c4e17f; }
+        }
+
+        @keyframes pulseBorder {
+            0%, 100% { border-color: #556b2f; }
+            50% { border-color: #9abc4a; }
+        }
+
+        body, #root {
+            background-color: #1b2a16 !important;
+            color: #c7d1a8 !important;
+            font-family: 'Orbitron', monospace !important;
+            text-shadow: 0 0 2px #4b6a2f;
+        }
+
+        .status-bar, .ammo-counter, .health-bar {
+            background-color: #3a4a21 !important;
+            border: 1px solid #556b2f !important;
+            color: #b0c080 !important;
+            font-family: 'Orbitron', monospace !important;
+            text-shadow: 0 0 3px #8da159;
+            animation: pulseBorder 3s infinite ease-in-out;
+            transition: border-color 0.3s ease;
+        }
+
+        /* 数値が更新された時にフラッシュさせるためのクラス */
+        .flash {
+            animation: flashGlow 1s ease forwards;
+        }
+
+        button, .btn {
+            background-color: #2c3a12 !important;
+            border: 1px solid #556b2f !important;
+            color: #aabb88 !important;
+            font-family: 'Orbitron', monospace !important;
+            text-shadow: 0 0 2px #7f9c57;
+            transition: transform 0.2s ease, background-color 0.2s ease, color 0.2s ease;
+        }
+        button:hover, .btn:hover {
+            transform: scale(1.1);
+            background-color: #3f5421 !important;
+            color: #d0e08a !important;
+            cursor: pointer;
+        }
+
+        .score, .timer {
+            color: #a4b36e !important;
+            font-weight: bold !important;
+            text-shadow: 0 0 5px #7a8a44;
+        }
+    `;
+    document.head.appendChild(style);
+
+    // 数値が変わったときに.flashクラスを一瞬付ける関数
+    function flashOnChange(element) {
+        if (!element) return;
+        let lastValue = element.textContent;
+        setInterval(() => {
+            if (element.textContent !== lastValue) {
+                lastValue = element.textContent;
+                element.classList.add('flash');
+                setTimeout(() => {
+                    element.classList.remove('flash');
+                }, 1000);
+            }
+        }, 300);
+    }
+
+    // 例：HPや弾数などの要素に対して監視をかける（適宜セレクター調整してください）
+    const hpElement = document.querySelector('.health-bar');
+    const ammoElement = document.querySelector('.ammo-counter');
+
+    flashOnChange(hpElement);
+    flashOnChange(ammoElement);
+
+})();

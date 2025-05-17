@@ -18,10 +18,8 @@ This Tampermonkey userscript applies an olive-green theme with the sleek Orbitro
 
 ## 🎮 Preview
 
-*(画像は実際に差し替えてください)*  
-<img width="1470" alt="Military UI Preview 1" src="https://raw.githubusercontent.com/ユーザー名/リポジトリ名/main/images/military-ui-1.png" />  
-<img width="1470" alt="Military UI Preview 2" src="https://raw.githubusercontent.com/ユーザー名/リポジトリ名/main/images/military-ui-2.png" />  
-<img width="1470" alt="Military UI Preview 3" src="https://raw.githubusercontent.com/ユーザー名/リポジトリ名/main/images/military-ui-3.png" />
+<img width="1470" alt="Image" src="https://github.com/user-attachments/assets/1438c068-cccd-402a-8dbb-04e8e25546cf" />
+<img width="1470" alt="Image" src="https://github.com/user-attachments/assets/5cc65362-3e2d-4e62-aaa4-9ddef1b4de2f" />
 
 ---
 
